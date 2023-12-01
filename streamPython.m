@@ -11,16 +11,18 @@ sd = igtlopen('localhost', 18944);
 while 1
     [screenImg info] = getLiveScreen(srv);
     scales=info.scale;
+    M(1,1)=scales(1);
+    M(1,2)=scales(2);
     position=info.position;
-    screenImg=rgb2gray(screenImg);
-    %imshow(screenImg)
+    I=rgb2gray(screenImg);
+    dims=size(I);
+    I = reshape(I, [dims(2), dims(1)]);
+    imshow(screenImg)
 
-    % wrap it for streamming 
-    dims=size(screenImg);
-    screenImg = reshape(screenImg, [dims(2), dims(1)]);
+
     IMGDATA.Type = 'IMAGE';
     IMGDATA.Name = 'MatlabImage';
-    IMGDATA.Image = screenImg;
+    IMGDATA.Image = I;
     IMGDATA.Trans = M;
     %IMGDATA.Timestamp=now;
     r = igtlsend(sd, IMGDATA);
