@@ -17,7 +17,7 @@ while 1
     I=rgb2gray(screenImg);
     dims=size(I);
     I = reshape(I, [dims(2), dims(1)]);
-    imshow(screenImg)
+    %imshow(screenImg)
 
 
     IMGDATA.Type = 'IMAGE';
